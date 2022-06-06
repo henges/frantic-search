@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Compare Lists</title>
+        <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+        <script src="./compare.js"></script>
+        <style>
+
+            body {
+                background-color: aqua;
+            }
+
+            h1 {
+                text-align: center;
+                font-style: italic;
+                margin-bottom: 0%;
+            }
+
+            h4 {
+                text-align: center;
+                margin-top: auto;
+            }
+
+            #inputs {
+                margin: auto;
+                width: auto;
+                text-align: center;
+            }
+
+            textarea {
+                min-height: 150px;
+                width: 30%;
+                display: inline-block;
+                margin: auto;
+                background-color: beige;
+            }
+
+            #send-input {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                size: 10em;
+            }
+
+            #copy-clipboard {
+                margin-bottom: 1%;
+            }
+
+            .nav-to-other {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h4><a href="../" class="nav-to-other">Go to Frantic Search...</a></h4>
+        <div id="main">
+            <h1>Compare lists</h1>
+            <h4>Given two lists, list A and list B, return the list of additions and removals required to transform A into B</h4>
+            <div id="inputs">
+                <textarea id="listA" name="listA" placeholder="List A..."></textarea>
+                <textarea id="listB" name="listB" placeholder="List B..."></textarea>
+            </div>
+            <button id="send-input" name="send-input">Go</button>
+        </div>
+        <div id="response" style="visibility:hidden">
+            <button id="copy-clipboard">Copy positive diffs to clipboard</button>
+            <table id="comparator-table" class="display" style="width:50%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </body>
+</html>
