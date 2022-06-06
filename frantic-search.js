@@ -26,6 +26,7 @@ var cachedRequestList = [
     }
   ];
 
+//Testcomment
 window.addEventListener('load', function() {
     var hosts = {...mtgMateMap, ...binderPosHostsMap};
     var checkboxDiv = document.getElementById("checkboxes-list");
