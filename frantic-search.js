@@ -71,18 +71,22 @@ var waitForJQuery = setInterval(function () {
 }, 10);
 
 var isQueryRunning = false;
+// var lastInput = "";
 
 function doQuery() {
 
-    if (isQueryRunning)
+    var inputString = $("#input").val();
+
+    if (isQueryRunning /*&& lastInput === inputString*/)
         return;
     
+    // lastInput = inputString;
     isQueryRunning = true;
+    var inputList = inputString.split("\n");
 
     spinnerShow();
 
-    var input = $("#input").val().split("\n");
-    var requestList = parseInput(input);
+    var requestList = parseInput(inputList);
 
     var toggles = {};
 
