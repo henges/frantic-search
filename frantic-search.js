@@ -70,7 +70,14 @@ var waitForJQuery = setInterval(function () {
     }
 }, 10);
 
+var isQueryRunning = false;
+
 function doQuery() {
+
+    if (isQueryRunning)
+        return;
+    
+    isQueryRunning = true;
 
     spinnerShow();
 
@@ -117,6 +124,7 @@ function doQuery() {
         createOrUpdateTable(Object.values(cardsMultimap).flat());
 
         spinnerHide();
+        isQueryRunning = false;
     });
 }
 
