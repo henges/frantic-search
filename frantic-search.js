@@ -17,11 +17,11 @@ const mtgMateMap = {
 var cachedMultimap = {"Snapcaster Mage":[{"name":"Snapcaster Mage","availableQuantity":1,"price":"$45.00","setName":"Innistrad","foil":"No","vendorName":"Games Portal","priceRank":1,"internalPrice":45},{"name":"Snapcaster Mage","availableQuantity":1,"price":"$47.50","setName":"Innistrad","foil":"No","vendorName":"Games Portal","priceRank":2,"internalPrice":47.5},{"name":"Snapcaster Mage","availableQuantity":1,"price":"$48.70","setName":"Innistrad","foil":"No","vendorName":"Good Games National","priceRank":3,"internalPrice":48.7},{"name":"Snapcaster Mage","availableQuantity":1,"price":"$52.30","setName":"The List","foil":"No","vendorName":"Cracking Singles","priceRank":4,"internalPrice":52.3},{"name":"Snapcaster Mage","availableQuantity":1,"price":"$52.90","setName":"Innistrad","foil":"No","vendorName":"The Hall of Heroes","priceRank":5,"internalPrice":52.9},{"name":"Snapcaster Mage","availableQuantity":3,"price":"$56.50","setName":"Innistrad","foil":"No","vendorName":"Games Portal","priceRank":6,"internalPrice":56.5},{"name":"Snapcaster Mage","availableQuantity":3,"price":"$57.60","setName":"The List","foil":"No","vendorName":"Good Games National","priceRank":7,"internalPrice":57.6},{"name":"Snapcaster Mage","availableQuantity":1,"price":"$57.60","setName":"The List","foil":"No","vendorName":"Good Games Morley","priceRank":7,"internalPrice":57.6},{"name":"Snapcaster Mage","availableQuantity":5,"price":"$59.50","setName":"Innistrad","foil":"No","vendorName":"Games Portal","priceRank":8,"internalPrice":59.5},{"name":"Snapcaster Mage","availableQuantity":22,"price":"$60.90","setName":"Innistrad","foil":"No","vendorName":"Guf","priceRank":9,"internalPrice":60.9},{"name":"Snapcaster Mage","availableQuantity":4,"price":"$60.90","setName":"Innistrad","foil":"No","vendorName":"Good Games National","priceRank":9,"internalPrice":60.9},{"name":"Snapcaster Mage","availableQuantity":4,"price":"$60.90","setName":"Innistrad","foil":"No","vendorName":"Good Games Morley","priceRank":9,"internalPrice":60.9},{"name":"Snapcaster Mage","availableQuantity":2,"price":"$60.90","setName":"Innistrad","foil":"No","vendorName":"Good Games Adelaide","priceRank":9,"internalPrice":60.9},{"name":"Snapcaster Mage","availableQuantity":3,"price":"$62.50","setName":"Modern Masters 2017","foil":"No","vendorName":"Games Portal","priceRank":10,"internalPrice":62.5},{"name":"Snapcaster Mage","availableQuantity":2,"price":"$62.50","setName":"Ultimate Masters","foil":"No","vendorName":"Games Portal","priceRank":10,"internalPrice":62.5},{"name":"Snapcaster Mage","availableQuantity":9,"price":"$63.90","setName":"Modern Masters 2017","foil":"No","vendorName":"Guf","priceRank":11,"internalPrice":63.9},{"name":"Snapcaster Mage","availableQuantity":4,"price":"$63.90","setName":"Modern Masters 2017","foil":"No","vendorName":"Good Games National","priceRank":11,"internalPrice":63.9},{"name":"Snapcaster Mage","availableQuantity":3,"price":"$64.30","setName":"Ultimate Masters","foil":"No","vendorName":"Good Games National","priceRank":12,"internalPrice":64.3},{"name":"Snapcaster Mage","availableQuantity":4,"price":"$64.30","setName":"Ultimate Masters","foil":"No","vendorName":"Good Games Adelaide","priceRank":12,"internalPrice":64.3},{"name":"Snapcaster Mage","availableQuantity":4,"price":"$65.00","setName":"Innistrad","foil":"No","vendorName":"MTGMate","priceRank":13,"internalPrice":65},{"name":"Snapcaster Mage","availableQuantity":1,"price":"$134.90","setName":"Ultimate Masters","foil":"Yes","vendorName":"Guf","priceRank":14,"internalPrice":134.9},{"name":"Snapcaster Mage","availableQuantity":4,"price":"$158.60","setName":"Innistrad","foil":"Yes","vendorName":"Good Games National","priceRank":15,"internalPrice":158.6},{"name":"Snapcaster Mage","availableQuantity":4,"price":"$198.30","setName":"Innistrad","foil":"Yes","vendorName":"Guf","priceRank":16,"internalPrice":198.3},{"name":"Snapcaster Mage","availableQuantity":1,"price":"$198.30","setName":"Innistrad","foil":"Yes","vendorName":"Good Games National","priceRank":16,"internalPrice":198.3},{"name":"Snapcaster Mage","availableQuantity":1,"price":"$228.00","setName":"Pro Tour Promos","foil":"Yes","vendorName":"MTGMate","priceRank":17,"internalPrice":228}],"Solitude":[{"name":"Solitude","availableQuantity":1,"price":"$63.40","setName":"Modern Horizons 2","foil":"No","vendorName":"Cracking Singles","priceRank":1,"internalPrice":63.4},{"name":"Solitude","availableQuantity":4,"price":"$65.00","setName":"Modern Horizons 2","foil":"No","vendorName":"MTGMate","priceRank":2,"internalPrice":65},{"name":"Solitude","availableQuantity":1,"price":"$69.70","setName":"Modern Horizons 2","foil":"No","vendorName":"Guf","priceRank":3,"internalPrice":69.7},{"name":"Solitude","availableQuantity":4,"price":"$69.70","setName":"Modern Horizons 2","foil":"No","vendorName":"Good Games Morley","priceRank":3,"internalPrice":69.7},{"name":"Solitude","availableQuantity":2,"price":"$69.70","setName":"Modern Horizons 2","foil":"No","vendorName":"Good Games Cannington","priceRank":3,"internalPrice":69.7},{"name":"Solitude","availableQuantity":3,"price":"$69.70","setName":"Modern Horizons 2","foil":"No","vendorName":"Good Games Adelaide","priceRank":3,"internalPrice":69.7},{"name":"Solitude","availableQuantity":4,"price":"$92.00","setName":"Modern Horizons 2","foil":"No","vendorName":"Games Portal","priceRank":4,"internalPrice":92},{"name":"Solitude","availableQuantity":2,"price":"$92.00","setName":"Modern Horizons 2","foil":"No","vendorName":"MTGMate","priceRank":4,"internalPrice":92},{"name":"Solitude","availableQuantity":2,"price":"$98.30","setName":"Modern Horizons 2","foil":"Yes","vendorName":"Good Games National","priceRank":5,"internalPrice":98.3},{"name":"Solitude","availableQuantity":1,"price":"$98.30","setName":"Modern Horizons 2","foil":"Yes","vendorName":"Good Games Morley","priceRank":5,"internalPrice":98.3},{"name":"Solitude","availableQuantity":1,"price":"$119.00","setName":"Modern Horizons 2 Prerelease Promos","foil":"Yes","vendorName":"Guf","priceRank":6,"internalPrice":119},{"name":"Solitude","availableQuantity":3,"price":"$119.00","setName":"Modern Horizons 2 Prerelease Promos","foil":"Yes","vendorName":"Good Games Adelaide","priceRank":6,"internalPrice":119}]};
 var cachedRequestList = [
     {
-      "card": "Snapcaster Mage",
+      "name": "Snapcaster Mage",
       "quantity": "4"
     },
     {
-      "card": "Solitude",
+      "name": "Solitude",
       "quantity": "3"
     }
   ];
@@ -57,6 +57,14 @@ var waitForJQuery = setInterval(function () {
             e.preventDefault();
             doQuery();
         });
+
+        //Search shift+enter or ctrl+enter
+        $("#input").on("keydown", function(e) {
+            if (e.code === "Enter" && (e.shiftKey || e.ctrlKey)) {
+                e.preventDefault();
+                doQuery();
+            }
+        })
 
         clearInterval(waitForJQuery);
     }
@@ -131,7 +139,7 @@ function parseInput(input) {
             quantity = quantity.match(/\b[0-9]*/)[0];
         }
         cardName.trim();
-        requestList.push({"card": cardName, "quantity": quantity});
+        requestList.push({"name": cardName, "quantity": quantity});
     }
 
     return requestList;
@@ -140,7 +148,7 @@ function parseInput(input) {
 async function createMtgMatePromise(requestList) {
 
     var requestString = _.chain(requestList)
-                            .map((card) => `${card["quantity"]} ${card["card"]}`)
+                            .map((card) => `${card.quantity} ${card.name}`)
                             .reduce((s1, s2) => `${s1}\n${s2}`)
                             .value();
 
@@ -181,10 +189,16 @@ async function processMtgMateResponse(response) {
 
 async function createBinderPosPromise(requestList, host) {
 
+    var requestObj = _.chain(requestList)
+                        .map(card => {
+                            return {"card": card.name, "quantity": card.quantity}
+                        })
+                        .value();
+
     return $.ajax({
         type: 'POST',
         url: `https://portal.binderpos.com/external/shopify/decklist?storeUrl=${host}&type=mtg`,
-        data: JSON.stringify(requestList),
+        data: JSON.stringify(requestObj),
         contentType: "application/json",
         dataType: "json"
     }).then(function (r) {
@@ -275,14 +289,14 @@ function getResultStatistics(requestList, cardsMultimap) {
     for (var [cardName, cardList] of Object.entries(cardsMultimap)) {
 
         //find the average nonfoil price of a card
-        var cardListNonFoil = _.filter(cardList, card => card["foil"] === "No");
+        var cardListNonFoil = _.filter(cardList, card => card.foil === "No");
         var avgNonfoilPrice = averagePrice(cardListNonFoil);
-        resultStatistics.cards.push({"cardName": cardName, "avg": avgNonfoilPrice});
+        resultStatistics.cards.push({"name": cardName, "avg": avgNonfoilPrice});
 
         //add this card to the vendor map
         for (var card of cardListNonFoil) {
 
-            var vendorName = card["vendorName"];
+            var vendorName = card.vendorName;
             //Init the vendor if not initialised
             if (!vendorMultimap.hasOwnProperty([vendorName])) {
                 vendorMultimap[vendorName] = {
@@ -294,12 +308,12 @@ function getResultStatistics(requestList, cardsMultimap) {
                 };
             }
             //Init the card for this vendor if not initialised
-            if (!vendorMultimap[vendorName]["cards"].hasOwnProperty(cardName)) {
-                vendorMultimap[vendorName]["cards"][cardName] = {"entries": [], "availableQuantity": 0};
+            if (!vendorMultimap[vendorName].cards.hasOwnProperty(cardName)) {
+                vendorMultimap[vendorName].cards[cardName] = {"entries": [], "availableQuantity": 0};
             }
-            var vendorCardObj = vendorMultimap[vendorName]["cards"][cardName];
-            vendorCardObj["entries"].push(card);
-            vendorCardObj["availableQuantity"] += card["availableQuantity"];
+            var vendorCardObj = vendorMultimap[vendorName].cards[cardName];
+            vendorCardObj.entries.push(card);
+            vendorCardObj.availableQuantity += card.availableQuantity;
         }
     }
 
@@ -307,7 +321,7 @@ function getResultStatistics(requestList, cardsMultimap) {
     for (var card of requestList) {
 
         for (var [vendorName, vendor] of Object.entries(vendorMultimap)) {
-            var vendorCardObj = vendor.cards[card.card];
+            var vendorCardObj = vendor.cards[card.name];
             //If the vendor doesn't have this card in stock at all, skip them
             if (!vendorCardObj) {
                 continue;
