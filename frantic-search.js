@@ -141,7 +141,7 @@ function parseInput(input) {
         var quantity, cardName;
         // At the start of a line, match any no. of numbers, then any no. of alphanumeric characters, then any 
         // number of spaces. e.g. "4x Snap" -> "4x ". "234abgdaiogs    Snapcaster Mage" -> "234abgdaiogs    "
-        quantity = line.match(/\b[0-9]*[A-z|0-9]\s*/)[0];
+        quantity = line.match(/\b[0-9]+[A-z|0-9]\s*/)[0];
         if (!quantity) {
             quantity = "1";
             cardName = line;
