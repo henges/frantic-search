@@ -166,7 +166,7 @@ async function createMtgMatePromise(requestList) {
                             .reduce((s1, s2) => `${s1}\n${s2}`)
                             .value();
 
-    return $.get("https://fs-cors-anywhere.herokuapp.com/https://www.mtgmate.com.au/cards/decklist_results?utf8=✓&decklist=" +
+    return $.get("https://polluxus.dev/mtgmate/?utf8=✓&decklist=" +
                 encodeURIComponent(requestString))
             .then(r => {
                 return processMtgMateResponse(r);
