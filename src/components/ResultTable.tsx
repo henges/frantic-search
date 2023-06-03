@@ -1,21 +1,21 @@
-import { createColumnHelper, useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
-import { Card } from "../types/Cards";
+import { createColumnHelper, useReactTable, getCoreRowModel, flexRender, RowData, ColumnMeta } from "@tanstack/react-table";
+import { VendorCard } from "../types/Cards";
 import { Box, Table, Thead, Tr, Th, Td, Tbody } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 
-const ResultTable = () => {
-
-    const data: Card = {
-        name: "Snapcaster Mage",
-        availableQuantity: 1,
-        foil: true,
-        price: 50,
-        priceRank: 1,
-        setName: "BRO",
-        vendorName: "Good Games Morley"
+declare module '@tanstack/table-core' {
+    interface ColumnMeta<TData extends RowData, TValue> {
+        isNumeric: boolean
     }
+}
 
-    const colHelper = createColumnHelper<Card>();
+export type ResultTableProps = {
+    cards: VendorCard[]
+}
+
+const ResultTable: React.FC<ResultTableProps> = ({ cards }) => {
+
+    const colHelper = createColumnHelper<VendorCard>();
 
     const columns = [
         colHelper.accessor("name", {
@@ -24,7 +24,10 @@ const ResultTable = () => {
         }),
         colHelper.accessor("price", {
             cell: info => info.getValue(),
-            header: "Price"
+            header: "Price",
+            meta: {
+                isNumeric: true
+            }
         }),
         colHelper.accessor("availableQuantity", {
             cell: info => info.getValue(),
@@ -49,7 +52,7 @@ const ResultTable = () => {
     ]
 
     const table = useReactTable({
-        data: [data],
+        data: cards,
         columns: columns,
         getCoreRowModel: getCoreRowModel()
     })
@@ -61,7 +64,7 @@ const ResultTable = () => {
                 <Tr key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
                       // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-                      const meta: any = header.column.columnDef.meta;
+                      const meta = header.column.columnDef.meta;
                       return (
                         <Th
                           key={header.id}
@@ -93,7 +96,7 @@ const ResultTable = () => {
                 <Tr key={row.id}>
                     {row.getVisibleCells().map((cell) => {
                     // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
-                    const meta: any = cell.column.columnDef.meta;
+                    const meta = cell.column.columnDef.meta;
                     return (
                         <Td key={cell.id} isNumeric={meta?.isNumeric}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}

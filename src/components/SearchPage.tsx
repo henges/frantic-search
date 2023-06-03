@@ -4,18 +4,33 @@ import VendorFilter from "./VendorFilter";
 import ResultTable from "./ResultTable";
 
 const PageHeader = () => (
-
     <>
-    <Heading>
-        Frantic Search
-    </Heading>
-    <Text>
-        Search Australian MTG vendors
-    </Text>
+        <Heading>
+            Frantic Search
+        </Heading>
+        <Text>
+            Search Australian MTG vendors
+        </Text>
     </>
 )
 
 const SearchPage = () => {
+
+    const cards = [{
+        name: "Snapcaster Mage",
+        availableQuantity: 1,
+        foil: true,
+        price: 50,
+        priceRank: 1,
+        setName: "BRO",
+        vendorName: "Good Games Morley"
+    }].flatMap((c) => {
+        const r = []
+        for (var i = 0; i < 20; i++) {
+            r.push(c)
+        }
+        return r
+    })
 
     return (
         <Container maxW={"100%"}>
@@ -30,7 +45,7 @@ const SearchPage = () => {
                     </VStack>
                 </GridItem>
             </Grid>
-            <ResultTable/>
+            <ResultTable cards={cards}/>
         </Container>
     )
 }
