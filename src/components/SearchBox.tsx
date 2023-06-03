@@ -3,21 +3,17 @@ import { ChangeEvent, ChangeEventHandler, KeyboardEvent, useState } from "react"
 import { parseSearchString } from "../converter/QueryConverter";
 import { useBinderPosStore } from "../stores/BinderPosStore";
 
-const SearchBox = () => {
+export type SearchBoxProps = {
+    handleSearch: (query: string) => void
+}
+
+const SearchBox: React.FC<SearchBoxProps> = ({ handleSearch }) => {
 
     const [searchString, setSearchString] = useState<string>("");
-    const search = useBinderPosStore((state) => state.search)
 
     const handleTextEntry = (e: ChangeEvent<HTMLTextAreaElement>) => {
 
         setSearchString(e.target.value);
-    }
-
-    const handleSearch = async () => {
-
-        const req = parseSearchString(searchString);
-
-        search(req);
     }
 
     const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -27,7 +23,7 @@ const SearchBox = () => {
         }
 
         e.preventDefault();
-        handleSearch();
+        handleSearch(searchString);
     }
 
     return (
@@ -38,7 +34,7 @@ const SearchBox = () => {
                     onKeyDown={handleKeyDown}
                     onChange={handleTextEntry}
                 />
-                <Button onClick={handleSearch}>Search</Button>
+                <Button onClick={() => handleSearch(searchString)}>Search</Button>
             </VStack>
         </HStack>
     )

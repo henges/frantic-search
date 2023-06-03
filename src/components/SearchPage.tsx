@@ -2,6 +2,10 @@ import { Box, Container, Flex, Grid, GridItem, HStack, Heading, Input, Text, VSt
 import SearchBox from "./SearchBox";
 import VendorFilter from "./VendorFilter";
 import ResultTable from "./ResultTable";
+import { useBinderPosStore } from "../stores/BinderPosStore";
+import { parseSearchString } from "../converter/QueryConverter";
+import { useState } from "react";
+import { VendorCard } from "../types/Cards";
 
 const PageHeader = () => (
     <>
@@ -15,6 +19,16 @@ const PageHeader = () => (
 )
 
 const SearchPage = () => {
+
+    const search = useBinderPosStore((state) => state.search)
+    const [results, setResults] = useState<VendorCard[]>([])
+
+    const handleSearch = async (query: string) => {
+
+        const req = parseSearchString(query);
+        const res = await search(req);
+        setResults(res);
+    }
 
     const cards = [{
         name: "Snapcaster Mage",
@@ -41,11 +55,11 @@ const SearchPage = () => {
                 <GridItem>
                     <VStack>
                         <PageHeader/>
-                        <SearchBox/>
+                        <SearchBox handleSearch={handleSearch}/>
                     </VStack>
                 </GridItem>
             </Grid>
-            <ResultTable cards={cards}/>
+            <ResultTable results={results}/>
         </Container>
     )
 }

@@ -10,10 +10,10 @@ declare module '@tanstack/table-core' {
 }
 
 export type ResultTableProps = {
-    cards: VendorCard[]
+    results: VendorCard[]
 }
 
-const ResultTable: React.FC<ResultTableProps> = ({ cards }) => {
+const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
 
     const colHelper = createColumnHelper<VendorCard>();
 
@@ -52,7 +52,7 @@ const ResultTable: React.FC<ResultTableProps> = ({ cards }) => {
     ]
 
     const table = useReactTable({
-        data: cards,
+        data: results,
         columns: columns,
         getCoreRowModel: getCoreRowModel()
     })

@@ -41,7 +41,7 @@ export const useBinderPosStore = create<Store & Actions>((set, get) => ({
 
         const reqs = _.chain(hosts)
             .transform((accum: Record<string, Promise<HttpResponse>>, h) => {
-                accum[h.name] = fakePost(
+                accum[h.name] = post(
                     `https://portal.binderpos.com/external/shopify/decklist?storeUrl=${h.url}&type=mtg`, 
                     query)
             })
