@@ -1,6 +1,7 @@
 import { Box, Container, Flex, Grid, GridItem, HStack, Heading, Input, Text, VStack } from "@chakra-ui/react"
 import SearchBox from "./SearchBox";
 import VendorFilter from "./VendorFilter";
+import ResultTable from "./ResultTable";
 
 const PageHeader = () => (
 
@@ -29,6 +30,7 @@ const SearchPage = () => {
                     </VStack>
                 </GridItem>
             </Grid>
+            <ResultTable/>
         </Container>
     )
 }

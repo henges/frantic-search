@@ -11,6 +11,7 @@ const SearchBox = () => {
             return;
         }
 
+        e.preventDefault();
         // TODO run search
     }
 
