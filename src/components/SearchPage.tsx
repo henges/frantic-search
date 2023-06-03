@@ -23,28 +23,18 @@ const SearchPage = () => {
     const search = useBinderPosStore((state) => state.search)
     const [results, setResults] = useState<VendorCard[]>([])
 
+    const processResults = (res: VendorCard[]) => {
+
+        
+    }
+
     const handleSearch = async (query: string) => {
 
         const req = parseSearchString(query);
         const res = await search(req);
+        const processed = processResults(res);
         setResults(res);
     }
-
-    const cards = [{
-        name: "Snapcaster Mage",
-        availableQuantity: 1,
-        foil: true,
-        price: 50,
-        priceRank: 1,
-        setName: "BRO",
-        vendorName: "Good Games Morley"
-    }].flatMap((c) => {
-        const r = []
-        for (var i = 0; i < 20; i++) {
-            r.push(c)
-        }
-        return r
-    })
 
     return (
         <Container maxW={"100%"}>

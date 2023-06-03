@@ -1,4 +1,4 @@
-import { createColumnHelper, useReactTable, getCoreRowModel, flexRender, RowData, ColumnMeta } from "@tanstack/react-table";
+import { createColumnHelper, useReactTable, getCoreRowModel, flexRender, RowData, ColumnMeta, getSortedRowModel } from "@tanstack/react-table";
 import { VendorCard } from "../types/Cards";
 import { Box, Table, Thead, Tr, Th, Td, Tbody } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
@@ -23,7 +23,7 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
             header: "Card Name"
         }),
         colHelper.accessor("price", {
-            cell: info => info.getValue(),
+            cell: info => `$${info.getValue().toFixed(2)}`,
             header: "Price",
             meta: {
                 isNumeric: true
@@ -54,7 +54,8 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
     const table = useReactTable({
         data: results,
         columns: columns,
-        getCoreRowModel: getCoreRowModel()
+        getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel()
     })
 
     return (

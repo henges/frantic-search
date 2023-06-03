@@ -1,7 +1,5 @@
 import { Button, HStack, Textarea, VStack } from "@chakra-ui/react";
-import { ChangeEvent, ChangeEventHandler, KeyboardEvent, useState } from "react";
-import { parseSearchString } from "../converter/QueryConverter";
-import { useBinderPosStore } from "../stores/BinderPosStore";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 export type SearchBoxProps = {
     handleSearch: (query: string) => void

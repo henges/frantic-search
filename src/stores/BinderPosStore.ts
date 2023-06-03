@@ -24,7 +24,6 @@ const resolveHosts = () => {
 }
 
 export const fakePost = (url: string, query: any) => {
-    console.log(url, query);
     return Promise.resolve({
             code: 200,
             ok: true,
@@ -47,22 +46,20 @@ export const useBinderPosStore = create<Store & Actions>((set, get) => ({
             })
             .map(async (v, k) => {
                 const result = (await v).body as BinderPosResponse[];
-                return _.chain(result)
-                    .flatMap((entry) => _.map(entry.products, (card) => {
-                        //variants is always a single-element array
-                        var variants = card.variants[0];
+                return result.flatMap((e) => e.products.map(c => {
+                    //variants is always a single-element array
+                    var variants = c.variants[0];
         
-                        return {
-                            name: card.name,
-                            availableQuantity: variants.quantity,
-                            price: variants.price,
-                            setName: card.setName,
-                            foil: !!variants.title.toLowerCase().match(/foil/),
-                            vendorName: k,
-                            priceRank: 0,
-                        } as VendorCard;
-                    }))
-                    .value();
+                    return {
+                        name: c.name,
+                        availableQuantity: variants.quantity,
+                        price: variants.price,
+                        setName: c.setName,
+                        foil: !!variants.title.toLowerCase().match(/foil/),
+                        vendorName: k,
+                        priceRank: 0,
+                    } as VendorCard;
+                }));
             })
             .value();
 
