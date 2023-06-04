@@ -1,7 +1,8 @@
-import { createColumnHelper, useReactTable, getCoreRowModel, flexRender, RowData, ColumnMeta, getSortedRowModel, getPaginationRowModel } from "@tanstack/react-table";
+import { createColumnHelper, useReactTable, getCoreRowModel, flexRender, RowData, ColumnMeta, getSortedRowModel, getPaginationRowModel, getFilteredRowModel } from "@tanstack/react-table";
 import { VendorCard } from "../types/Cards";
 import { Box, Table, Thead, Tr, Th, Td, Tbody, Center, Flex, Button, Select, Input, HStack } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import { useMemo, useState } from "react";
 
 declare module '@tanstack/table-core' {
     interface ColumnMeta<TData extends RowData, TValue> {
@@ -15,9 +16,11 @@ export type ResultTableProps = {
 
 const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
 
+    const [globalFilter, setGlobalFilter] = useState<string>("");
+
     const colHelper = createColumnHelper<VendorCard>();
 
-    const columns = [
+    const columns = useMemo(() => [
         colHelper.accessor("name", {
             cell: info => info.getValue(),
             header: "Card Name"
@@ -52,18 +55,27 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
             cell: info => info.getValue(),
             header: "Vendor"
         }),
-    ]
+    ], [])
 
     const table = useReactTable({
         data: results,
         columns: columns,
+        state: {
+            globalFilter: globalFilter
+        },
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
-        getPaginationRowModel: getPaginationRowModel()
+        getPaginationRowModel: getPaginationRowModel(),
+        getFilteredRowModel: getFilteredRowModel()
     })
 
     return (
-        <Box>
+        <Box pt="16px">
+            <Input
+            placeholder="Filter results..."
+            width="360px"
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            />
             <Box overflow="scroll">
                 <Table>
                     <Thead>
