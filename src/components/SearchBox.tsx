@@ -32,16 +32,14 @@ const SearchBox: React.FC<SearchBoxProps> = ({ handleSearch }) => {
     }
 
     return (
-        <HStack>
-            <VStack>
-                <Textarea 
-                    resize={"both"} 
-                    onKeyDown={handleKeyDown}
-                    onChange={handleTextEntry}
-                />
-                <Button isLoading={loading} onClick={doSearch}>Search</Button>
-            </VStack>
-        </HStack>
+        <VStack>
+            <Textarea 
+                resize={"both"} 
+                onKeyDown={handleKeyDown}
+                onChange={handleTextEntry}
+            />
+            <Button isLoading={loading} onClick={doSearch}>Search</Button>
+        </VStack>
     )
 }
 

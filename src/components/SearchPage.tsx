@@ -21,7 +21,7 @@ const PageHeader = () => (
 const SearchPage = () => {
 
     const search = useBinderPosStore((state) => state.search)
-    const [results, setResults] = useState<VendorCard[]>([])
+    const [results, setResults] = useState<VendorCard[]|null>(null)
 
     const processResults = (res: VendorCard[]) => {
 
@@ -64,7 +64,7 @@ const SearchPage = () => {
     }
 
     return (
-        <Container maxW={"100%"}>
+        <Container w="100vw" h="100vh" maxW="100vw" marginInline={"0"} py="16px">
             <Grid templateColumns={"repeat(3, 1fr)"}>
                 <GridItem>
                     <VendorFilter/>
@@ -76,7 +76,7 @@ const SearchPage = () => {
                     </VStack>
                 </GridItem>
             </Grid>
-            <ResultTable results={results}/>
+            {results && <ResultTable results={results}/>}
         </Container>
     )
 }

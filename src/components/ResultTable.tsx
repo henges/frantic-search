@@ -1,6 +1,6 @@
 import { createColumnHelper, useReactTable, getCoreRowModel, flexRender, RowData, ColumnMeta, getSortedRowModel } from "@tanstack/react-table";
 import { VendorCard } from "../types/Cards";
-import { Box, Table, Thead, Tr, Th, Td, Tbody } from "@chakra-ui/react";
+import { Box, Table, Thead, Tr, Th, Td, Tbody, Center } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 
 declare module '@tanstack/table-core' {
@@ -93,7 +93,8 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
                 ))}
             </Thead>
             <Tbody>
-                {table.getRowModel().rows.map((row) => (
+                {results.length > 0 ?
+                table.getRowModel().rows.map((row) => (
                 <Tr key={row.id}>
                     {row.getVisibleCells().map((cell) => {
                     // see https://tanstack.com/table/v8/docs/api/core/column-def#meta to type this correctly
@@ -105,7 +106,14 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
                     );
                     })}
                 </Tr>
-                ))}
+                ))
+                : 
+                // again, why doesnt this work?
+                <Tr key={"none"}>
+                    <Center w="100%">
+                    No results found... :\
+                    </Center>
+                </Tr>}
             </Tbody>
         </Table>
     )

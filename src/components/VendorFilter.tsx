@@ -24,25 +24,25 @@ const VendorFilter = () => {
     }
 
     return (
-        <Box>
+        <Flex height="100%" flexDir="column" alignItems={"center"}>
             {expanded && (
-                <Flex flexDir="column">
-                    {/*TODO need to figure out the max height thing better*/}
-                    <VStack wrap={"wrap"} maxH={"180px"} alignItems={"baseline"}>
-                        {vendors.map(e => (
-                        <Checkbox key={e.name} onChange={ev => handleCheck(ev.target.checked, e.url)} isChecked={!ignore[e.url]}>
-                            {e.name}
-                        </Checkbox>
-                        ))}
-                    </VStack>
-                    <Button onClick={() => setExpanded(false)}>Hide</Button>
-                </Flex>
+                <>
+                {/*TODO need to figure out the max height thing better*/}
+                <VStack wrap={"wrap"} width="100%" maxH={"50%"} alignItems={"baseline"}>
+                    {vendors.map(e => (
+                    <Checkbox key={e.name} onChange={ev => handleCheck(ev.target.checked, e.url)} isChecked={!ignore[e.url]}>
+                        {e.name}
+                    </Checkbox>
+                    ))}
+                </VStack>
+                <Button onClick={() => setExpanded(false)}>Hide</Button>
+                </>
             )}
             {!expanded &&
-            <Button onClick={() => {if (!expanded) {setExpanded(true)}}}>
+            <Button maxW="50%" onClick={() => {if (!expanded) {setExpanded(true)}}}>
                 Show vendors...
             </Button>}
-        </Box>
+        </Flex>
     )
 }
 
