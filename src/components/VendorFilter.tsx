@@ -7,7 +7,7 @@ const VendorFilter = () => {
 
     const [expanded, setExpanded] = useState<boolean>(false);
 
-    const vendors = Object.values(VENDORS).flatMap(e => Object.values(e));
+    const vendors = Object.values(VENDORS).flatMap(e => Object.values(e)).sort((a, b) => a.name === b.name ? 0 : a.name < b.name ? -1 : 1);
     const [ignore, setIgnore] = useLocalStorage<Record<string, boolean>>("fs-ignore-vendors", {});
 
     const handleCheck = (checked: boolean, url: string) => {
@@ -40,7 +40,7 @@ const VendorFilter = () => {
             )}
             {!expanded &&
             <Button maxW="50%" onClick={() => {if (!expanded) {setExpanded(true)}}}>
-                Show vendors...
+                Show vendors
             </Button>}
         </Flex>
     )
