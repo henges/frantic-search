@@ -2,26 +2,33 @@ import { Button, HStack, Textarea, VStack } from "@chakra-ui/react";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 export type SearchBoxProps = {
-    handleSearch: (query: string) => void
+    handleSearch: (query: string) => void|Promise<void>
 }
 
 const SearchBox: React.FC<SearchBoxProps> = ({ handleSearch }) => {
 
     const [searchString, setSearchString] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleTextEntry = (e: ChangeEvent<HTMLTextAreaElement>) => {
 
         setSearchString(e.target.value);
     }
 
-    const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    const handleKeyDown = async (e: KeyboardEvent<HTMLTextAreaElement>) => {
 
         if (e.key !== "Enter" || (!e.ctrlKey && !e.shiftKey)) {
             return;
         }
 
         e.preventDefault();
-        handleSearch(searchString);
+        await doSearch();
+    }
+
+    const doSearch = async () => {
+        setLoading(true);
+        await handleSearch(searchString);
+        setLoading(false);
     }
 
     return (
@@ -32,7 +39,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ handleSearch }) => {
                     onKeyDown={handleKeyDown}
                     onChange={handleTextEntry}
                 />
-                <Button onClick={() => handleSearch(searchString)}>Search</Button>
+                <Button isLoading={loading} onClick={doSearch}>Search</Button>
             </VStack>
         </HStack>
     )

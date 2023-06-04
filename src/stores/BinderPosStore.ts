@@ -16,8 +16,8 @@ interface Actions {
 const resolveHosts = () => {
 
     const resolved = Object.assign({}, BINDER_POS_VENDORS);
-    const exclude: Array<string> = JSON.parse(localStorage.getItem("fs-ignore-vendors") || "[]");
-    exclude.forEach(k => delete resolved[k]);
+    const exclude: Record<string, boolean> = JSON.parse(localStorage.getItem("fs-ignore-vendors") || "{}");
+    Object.keys(exclude).forEach(k => delete resolved[k]);
 
     return resolved;
 }
