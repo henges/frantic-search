@@ -3,9 +3,10 @@ import SearchBox from "./SearchBox";
 import VendorFilter from "./VendorFilter";
 import ResultTable from "./ResultTable";
 import { useBinderPosStore } from "../stores/BinderPosStore";
-import { parseSearchString } from "../converter/QueryConverter";
+import { SearchRequest, parseSearchString } from "../converter/QueryConverter";
 import { useState } from "react";
 import { VendorCard } from "../types/Cards";
+import { useMtgMateStore } from "../stores/MtgMateStore";
 
 const PageHeader = () => (
     <>
@@ -20,7 +21,8 @@ const PageHeader = () => (
 
 const SearchPage = () => {
 
-    const search = useBinderPosStore((state) => state.search)
+    const searchMtgMate = useMtgMateStore((state) => state.search)
+    const searchBinderPos = useBinderPosStore((state) => state.search)
     const [results, setResults] = useState<VendorCard[]|null>(null)
 
     const processResults = (res: VendorCard[]) => {
@@ -53,6 +55,11 @@ const SearchPage = () => {
 
             return sorted;
         }).flat();
+    }
+
+    const search = async (query: SearchRequest[]) => {
+
+        return Promise.all([searchBinderPos(query), searchMtgMate(query)]).then(r => r.flat())
     }
 
     const handleSearch = async (query: string) => {
