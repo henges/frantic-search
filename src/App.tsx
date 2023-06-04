@@ -1,9 +1,7 @@
 import {
   ChakraProvider,
   StyleFunctionProps,
-  border,
   extendTheme,
-  theme
 } from "@chakra-ui/react"
 import { mode } from '@chakra-ui/theme-tools'
 import SearchPage from "./components/SearchPage"

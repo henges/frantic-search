@@ -35,7 +35,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ handleSearch }) => {
         <VStack>
             <Textarea 
                 resize={"both"} 
-                width="420px"
+                width="360px"
                 height="180px"
                 onKeyDown={handleKeyDown}
                 onChange={handleTextEntry}

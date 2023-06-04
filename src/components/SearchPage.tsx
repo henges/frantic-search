@@ -74,7 +74,7 @@ const SearchPage = () => {
         <Container w="100%" h="100%" maxW="100%" marginInline={"0"} py="16px">
             <Grid templateColumns={"repeat(3, 1fr)"}>
                 <GridItem>
-                    <VendorFilter/>
+                    {/* <VendorFilter/> */}
                 </GridItem>
                 <GridItem>
                     <VStack>
