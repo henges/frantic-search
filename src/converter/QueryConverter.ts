@@ -1,4 +1,7 @@
-import { SearchRequest } from "../api/SearchProvider";
+export type SearchRequest = {
+    name: string
+    quantity: string
+}
 
 export const parseSearchString = (input: string): SearchRequest[] => {
 

@@ -1,10 +1,9 @@
 import { create } from "zustand";
-import { SearchRequest } from "../api/SearchProvider";
+import { SearchRequest } from "../converter/QueryConverter";
 import { VendorCard } from "../types/Cards";
 import { BINDER_POS_VENDORS } from "../types/Vendors";
-import _ from "lodash";
-import { HttpResponse, post } from "../api/Http";
-import { BinderPosProduct, BinderPosRequest, BinderPosResponse } from "../types/BinderPos";
+import { post } from "../api/Http";
+import { BinderPosResponse } from "../types/BinderPos";
 
 interface Store {
     memo: { [query: string]: Promise<VendorCard[]> }
