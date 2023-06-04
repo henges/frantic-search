@@ -25,7 +25,34 @@ const SearchPage = () => {
 
     const processResults = (res: VendorCard[]) => {
 
-        
+        // Map entries to card name
+        const keyedByName = res.reduce((accum: Record<string, VendorCard[]>, e) => {
+
+            if (!accum[e.name]) {
+                accum[e.name] = [];
+            }
+            accum[e.name].push(e);
+            return accum;
+        }, {})
+
+        // Sort and rank results
+        return Object.values(keyedByName).map(v => {
+            const sorted = v.sort((a, b) => a.price - b.price);
+
+            let priceRank = 1;
+            for (let i = 0; i < sorted.length; i++) {
+
+                // After the first entry, check that the previous
+                // values is actually lower than the current and 
+                // increment current price rank if so
+                if (i > 0 && sorted[i - 1].price < sorted[i].price) {
+                    priceRank++
+                }
+                sorted[i].priceRank = priceRank;
+            }
+
+            return sorted;
+        }).flat();
     }
 
     const handleSearch = async (query: string) => {
@@ -33,7 +60,7 @@ const SearchPage = () => {
         const req = parseSearchString(query);
         const res = await search(req);
         const processed = processResults(res);
-        setResults(res);
+        setResults(processed);
     }
 
     return (

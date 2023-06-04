@@ -4,7 +4,7 @@ import { VendorCard } from "../types/Cards";
 import { BINDER_POS_VENDORS } from "../types/Vendors";
 import _ from "lodash";
 import { HttpResponse, post } from "../api/Http";
-import { BinderPosRequest, BinderPosResponse } from "../types/BinderPos";
+import { BinderPosProduct, BinderPosRequest, BinderPosResponse } from "../types/BinderPos";
 
 interface Store {
     memo: { [query: string]: Promise<VendorCard[]> }
@@ -38,34 +38,50 @@ export const useBinderPosStore = create<Store & Actions>((set, get) => ({
         const hosts = resolveHosts();
         const query = r.map(card => ({card: card.name, quantity: card.quantity}));
 
-        const reqs = _.chain(hosts)
-            .transform((accum: Record<string, Promise<HttpResponse>>, h) => {
-                accum[h.name] = post(
-                    `https://portal.binderpos.com/external/shopify/decklist?storeUrl=${h.url}&type=mtg`, 
-                    query)
-            })
-            .map(async (v, k) => {
-                const result = (await v).body as BinderPosResponse[];
-                return result.flatMap((e) => e.products.map(c => {
+        const result = Object.values(hosts).map(async (v) => {
+            const response = (await post(
+                `https://portal.binderpos.com/external/shopify/decklist?storeUrl=${v.url}&type=mtg`, 
+                query)).body as BinderPosResponse[];
+
+            const result = response
+                .flatMap(e => e.products)
+                .reduce((accum: Record<string, VendorCard>, c) => {
                     //variants is always a single-element array
                     var variants = c.variants[0];
-        
-                    return {
+                    let vendor = v.name;
+                    // Special case for Guf, who returns the store location in the `title` field
+                    if (vendor === "Guf") {
+                        const storeName = variants.title.match(/^\w+\b/)?.[0];
+                        storeName && (vendor += ` (${storeName})`)
+                    }
+
+                    const entry: VendorCard = {
                         name: c.name,
                         availableQuantity: variants.quantity,
                         price: variants.price,
                         setName: c.setName,
                         foil: !!variants.title.toLowerCase().match(/foil/),
-                        vendorName: k,
+                        vendorName: vendor,
                         priceRank: 0,
-                    } as VendorCard;
-                }));
-            })
-            .value();
+                    };
 
-        console.log(reqs)
+                    // Deduplicate entries
+                    var key = entry.name + entry.setName + entry.vendorName + entry.foil + entry.price.toString();
+                    if (accum[key]) {
 
-        return Promise.all(reqs)
+                        accum[key].availableQuantity += entry.availableQuantity;
+                    } else {
+        
+                        accum[key] = entry;
+                    }
+
+                    return accum;
+                }, {})
+
+            return Object.values(result);
+        });
+
+        return Promise.all(result)
             .then((v) => v.flat());
     }
 }))
