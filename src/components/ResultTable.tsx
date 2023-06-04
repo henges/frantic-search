@@ -31,7 +31,10 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
         }),
         colHelper.accessor("availableQuantity", {
             cell: info => info.getValue(),
-            header: "Quantity"
+            header: "Quantity",
+            meta: {
+                isNumeric: true
+            }
         }),
         colHelper.accessor("setName", {
             cell: info => info.getValue(),
@@ -150,7 +153,7 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
                     Go to page:
                     <Input
                     type="number"
-                    maxW="min-content"
+                    maxW="100px"
                     defaultValue={table.getState().pagination.pageIndex + 1}
                     onChange={e => {
                         const page = e.target.value ? Number(e.target.value) - 1 : 0

@@ -35,8 +35,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({ handleSearch }) => {
         <VStack>
             <Textarea 
                 resize={"both"} 
+                width="420px"
+                height="180px"
                 onKeyDown={handleKeyDown}
                 onChange={handleTextEntry}
+                placeholder={`Enter your decklist in the form "4 Snapcaster Mage"; card names must exactly match the printed card`}
             />
             <Button isLoading={loading} onClick={doSearch}>Search</Button>
         </VStack>

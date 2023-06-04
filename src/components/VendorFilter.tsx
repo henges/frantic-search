@@ -24,7 +24,7 @@ const VendorFilter = () => {
     }
 
     return (
-        <Flex height="100%" flexDir="column" alignItems={"center"}>
+        <Flex height="100%" flexDir="column" alignItems={"center"} zIndex={1}>
             {expanded && (
                 <>
                 {/*TODO need to figure out the max height thing better*/}
@@ -39,7 +39,7 @@ const VendorFilter = () => {
                 </>
             )}
             {!expanded &&
-            <Button maxW="50%" onClick={() => {if (!expanded) {setExpanded(true)}}}>
+            <Button maxW="min-content" onClick={() => {if (!expanded) {setExpanded(true)}}}>
                 Show vendors
             </Button>}
         </Flex>
