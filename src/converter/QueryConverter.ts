@@ -21,7 +21,7 @@ export const parseSearchString = (input: string): SearchRequest[] => {
             
             const [_fullMatch, _countWithSpaces, quantity, name] = l as RegExpMatchArray; // guaranteed non-null via `filter` call above
             return {
-                name: name,
+                name: name.trim(),
                 quantity: quantity || "1"
             }
         })
