@@ -15,7 +15,7 @@ export const parseSearchString = (input: string): SearchRequest[] => {
     // in position 1, which we ignore.
     return input
         .split('\n')
-        .map(l => l.match(/\b((?=([0-9]+))\w*\s*)?([A-z0-9\s\-!,]+)/))
+        .map(l => l.match(/((?=([0-9]+))\w*\s*)?(.+)/))
         .filter(l => l && l.length > 0)
         .map((l) => {
             
