@@ -28,7 +28,6 @@ const custom = extendTheme({
 
 export const App = () => (
   <ChakraProvider theme={custom}>
-    <ColorModeSwitcher/>
     <SearchPage/>
   </ChakraProvider>
 )

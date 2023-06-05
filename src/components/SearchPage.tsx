@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Grid, GridItem, HStack, Heading, Input, Text, VStack } from "@chakra-ui/react"
+import { Box, Container, Flex, Grid, GridItem, HStack, Heading, IconButton, Input, Text, VStack } from "@chakra-ui/react"
 import SearchBox from "./SearchBox";
 import VendorFilter from "./VendorFilter";
 import ResultTable from "./ResultTable";
@@ -7,6 +7,8 @@ import { SearchRequest, parseSearchString } from "../converter/QueryConverter";
 import { useState } from "react";
 import { VendorCard } from "../types/Cards";
 import { useMtgMateStore } from "../stores/MtgMateStore";
+import { ColorModeSwitcher } from "./vendor/ColorModeSwitcher";
+import { FaMoon } from "react-icons/fa";
 
 const PageHeader = () => (
     <>
@@ -17,6 +19,19 @@ const PageHeader = () => (
             Search Australian MTG vendors
         </Text>
     </>
+)
+
+const SearchPageNav = () => (
+    <Flex
+        flexDir="column"
+        gap="2"
+        position="fixed"
+        top="16px"
+        right="16px"
+    >
+        <VendorFilter/>
+        <ColorModeSwitcher />
+    </Flex>
 )
 
 const SearchPage = () => {
@@ -71,10 +86,12 @@ const SearchPage = () => {
     }
 
     return (
+        <>
+        <SearchPageNav/>
         <Container w="100%" h="100%" maxW="100%" marginInline={"0"} py="16px">
+            {/* TODO: grid is just for padding now, can center content instead. */}
             <Grid templateColumns={"repeat(3, 1fr)"}>
                 <GridItem>
-                    {/* <VendorFilter/> */}
                 </GridItem>
                 <GridItem>
                     <VStack>
@@ -85,6 +102,7 @@ const SearchPage = () => {
             </Grid>
             {results && <ResultTable results={results}/>}
         </Container>
+        </>
     )
 }
 
