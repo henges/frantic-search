@@ -33,7 +33,12 @@ export const useMtgMateStore = create<Store & Actions>((set, _get) => ({
             const response = (await get(`${v.url}${encodeURIComponent(query)}`)).body as string;
 
             const dom = new DOMParser().parseFromString(response, "text/html");
-            const result = Array.from(dom.querySelectorAll("tbody").item(1).querySelectorAll("tr"))
+            // Handle no-match case - even though TS claims this can't be undefined, it of course can.
+            const table = dom.querySelectorAll("tbody").item(1);
+            if (!table) {
+                return [];
+            }
+            const result = Array.from(table.querySelectorAll("tr"))
                 .map(r => {
                     let name = r.querySelector("td.card-name")?.querySelector("a")?.text.trim() || "";
                     if (name.indexOf("(") > 0) {
@@ -50,7 +55,7 @@ export const useMtgMateStore = create<Store & Actions>((set, _get) => ({
                         priceRank: 0
                     };
 
-                    return ret
+                    return ret;
                 })
 
             return result;

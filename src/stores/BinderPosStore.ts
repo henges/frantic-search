@@ -35,7 +35,8 @@ export const useBinderPosStore = create<Store & Actions>((set, get) => ({
     search: async (r) => {
 
         const hosts = resolveHosts();
-        const query = r.map(card => ({card: card.name, quantity: card.quantity}));
+        // Strip diacritics, if any, from BinderPOS seaches (their backend won't accept them otherwise.)
+        const query = r.map(card => ({card: card.name.normalize("NFD").replace(/\p{Diacritic}/gu, ""), quantity: card.quantity}));
 
         const result = Object.values(hosts).map(async (v) => {
             const response = (await post(
