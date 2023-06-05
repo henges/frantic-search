@@ -3,14 +3,14 @@ import { Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFo
 export type BasicModalProps = {
 
   isOpen: boolean,
-  onReset?: () => void,
+  reset?: {text: string, action: () => void},
   onSave?: () => void,
   onClose: () => void,
   title: string,
   children: React.ReactElement | React.ReactElement[]
 }
 
-export const BasicModal: React.FC<BasicModalProps> = ({ isOpen, onReset, onSave, onClose, title, children }) => {
+export const BasicModal: React.FC<BasicModalProps> = ({ isOpen, reset, onSave, onClose, title, children }) => {
     return (
         <>
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -22,9 +22,9 @@ export const BasicModal: React.FC<BasicModalProps> = ({ isOpen, onReset, onSave,
               {children}
             </ModalBody>
             <ModalFooter>
-                {onReset &&
-                <Button colorScheme='whiteAlpha' mr={"auto"} onClick={onReset}>
-                  Reset
+                {reset &&
+                <Button colorScheme='whiteAlpha' mr={"auto"} onClick={reset.action}>
+                  {reset.text}
                 </Button>}
                 <Button colorScheme='blue' mr={3} onClick={onSave || onClose}>
                   Save
