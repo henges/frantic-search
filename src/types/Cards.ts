@@ -4,7 +4,7 @@ export type Card = {
 }
 
 export type VendorCard = Card & {
-    availableQuantity: number
+    quantity: number
     price: number // TODO: consolidate price and internalPrice property into this.
     foil: boolean
     vendorName: string

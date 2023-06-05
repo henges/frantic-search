@@ -32,7 +32,7 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
                 isNumeric: true
             }
         }),
-        colHelper.accessor("availableQuantity", {
+        colHelper.accessor("quantity", {
             cell: info => info.getValue(),
             header: "Quantity",
             meta: {
@@ -90,20 +90,20 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
                                 onClick={header.column.getToggleSortingHandler()}
                                 isNumeric={meta?.isNumeric}
                                 >
-                                {flexRender(
-                                    header.column.columnDef.header,
-                                    header.getContext()
-                                )}
+                                    {flexRender(
+                                        header.column.columnDef.header,
+                                        header.getContext()
+                                    )}
                 
-                                <Box as="span" pl="4">
-                                    {header.column.getIsSorted() ? (
-                                    header.column.getIsSorted() === "desc" ? (
-                                        <TriangleDownIcon aria-label="sorted descending" />
-                                    ) : (
-                                        <TriangleUpIcon aria-label="sorted ascending" />
-                                    )
-                                    ) : null}
-                                </Box>
+                                    <Box as="span" pl="4">
+                                        {header.column.getIsSorted() ? (
+                                        header.column.getIsSorted() === "desc" ? (
+                                            <TriangleDownIcon aria-label="sorted descending" />
+                                        ) : (
+                                            <TriangleUpIcon aria-label="sorted ascending" />
+                                        )
+                                        ) : null}
+                                    </Box>
                                 </Th>
                             );
                             })}

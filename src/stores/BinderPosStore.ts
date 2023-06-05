@@ -56,7 +56,7 @@ export const useBinderPosStore = create<Store & Actions>((set, get) => ({
 
                     const entry: VendorCard = {
                         name: c.name,
-                        availableQuantity: variants.quantity,
+                        quantity: variants.quantity,
                         price: variants.price,
                         setName: c.setName,
                         foil: !!variants.title.toLowerCase().match(/foil/),
@@ -68,7 +68,7 @@ export const useBinderPosStore = create<Store & Actions>((set, get) => ({
                     var key = entry.name + entry.setName + entry.vendorName + entry.foil + entry.price.toString();
                     if (accum[key]) {
 
-                        accum[key].availableQuantity += entry.availableQuantity;
+                        accum[key].quantity += entry.quantity;
                     } else {
         
                         accum[key] = entry;

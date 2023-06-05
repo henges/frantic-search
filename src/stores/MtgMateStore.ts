@@ -42,7 +42,7 @@ export const useMtgMateStore = create<Store & Actions>((set, _get) => ({
 
                     const ret: VendorCard = {
                         name: name,
-                        availableQuantity: parseInt(r.querySelector("td.available-quantity")?.textContent?.trim() || "0"),
+                        quantity: parseInt(r.querySelector("td.available-quantity")?.textContent?.trim() || "0"),
                         price: parseFloat(r.querySelector("td.price")?.textContent?.trim().slice(1) || "0.00"),
                         setName: r.querySelector("td.magic-set-name")?.querySelector("a")?.text.trim() || "",
                         foil: r.querySelector("td.card-name")?.querySelector("span.finish")?.textContent?.trim() !== "Nonfoil",
