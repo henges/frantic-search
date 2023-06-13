@@ -70,10 +70,11 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
     })
 
     return (
-        <Box pt="16px">
+        <Flex pt="16px" direction="column">
             <Input
             placeholder="Filter results..."
-            width="360px"
+            width={"sm"}
+            alignSelf={["center", "start"]}
             onChange={(e) => setGlobalFilter(e.target.value)}
             />
             <Box overflow="scroll">
@@ -192,7 +193,7 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
                 </Select>
             </Flex>
         </HStack>
-      </Box>
+      </Flex>
     )
 }
 
