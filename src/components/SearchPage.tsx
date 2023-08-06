@@ -3,12 +3,11 @@ import SearchBox from "./SearchBox";
 import VendorFilter from "./VendorFilter";
 import ResultTable from "./ResultTable";
 import { useBinderPosStore } from "../stores/BinderPosStore";
-import { SearchRequest, parseSearchString } from "../converter/QueryConverter";
-import { useState } from "react";
+import { CardRequest, parseSearchString } from "../converter/QueryConverter";
+import { useEffect, useState } from "react";
 import { VendorCard } from "../types/Cards";
 import { useMtgMateStore } from "../stores/MtgMateStore";
 import { ColorModeSwitcher } from "./vendor/ColorModeSwitcher";
-import { FaMoon } from "react-icons/fa";
 
 const PageHeader = () => (
     <>
@@ -39,6 +38,11 @@ const SearchPage = () => {
     const searchMtgMate = useMtgMateStore((state) => state.search)
     const searchBinderPos = useBinderPosStore((state) => state.search)
     const [results, setResults] = useState<VendorCard[]|null>(null)
+
+    const search = async (query: CardRequest[]) => {
+
+        return Promise.all([searchBinderPos(query), searchMtgMate(query)]).then(r => r.flat())
+    }
 
     const processResults = (res: VendorCard[]) => {
 
@@ -72,11 +76,6 @@ const SearchPage = () => {
         }).flat();
     }
 
-    const search = async (query: SearchRequest[]) => {
-
-        return Promise.all([searchBinderPos(query), searchMtgMate(query)]).then(r => r.flat())
-    }
-
     const handleSearch = async (query: string) => {
 
         const req = parseSearchString(query);
@@ -90,16 +89,12 @@ const SearchPage = () => {
         <SearchPageNav/>
         <Container w="100%" h="100%" maxW="100%" marginInline={"0"} py="16px">
             {/* TODO: grid is just for padding now, can center content instead. */}
-            <Grid templateColumns={"repeat(3, 1fr)"}>
-                <GridItem>
-                </GridItem>
-                <GridItem>
-                    <VStack>
-                        <PageHeader/>
-                        <SearchBox handleSearch={handleSearch}/>
-                    </VStack>
-                </GridItem>
-            </Grid>
+            <HStack alignItems={"center"} justifyContent={"center"}>
+                <VStack>
+                    <PageHeader/>
+                    <SearchBox handleSearch={handleSearch}/>
+                </VStack>
+            </HStack>
             {results && <ResultTable results={results}/>}
         </Container>
         </>

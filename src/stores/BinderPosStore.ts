@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { SearchRequest } from "../converter/QueryConverter";
+import { CardRequest } from "../converter/QueryConverter";
 import { VendorCard } from "../types/Cards";
 import { BINDER_POS_VENDORS } from "../types/Vendors";
 import { post } from "../api/Http";
@@ -10,7 +10,7 @@ interface Store {
 }
 
 interface Actions {
-    search: (r: SearchRequest[]) => Promise<VendorCard[]>
+    search: (r: CardRequest[]) => Promise<VendorCard[]>
 }
 
 const resolveHosts = () => {
@@ -61,12 +61,12 @@ export const useBinderPosStore = create<Store & Actions>((set, get) => ({
                         price: variants.price,
                         setName: c.setName,
                         foil: !!variants.title.toLowerCase().match(/foil/),
-                        vendorName: vendor,
+                        vendor: vendor,
                         priceRank: 0,
                     };
 
                     // Deduplicate entries
-                    var key = entry.name + entry.setName + entry.vendorName + entry.foil + entry.price.toString();
+                    var key = entry.name + entry.setName + entry.vendor + entry.foil + entry.price.toString();
                     if (accum[key]) {
 
                         accum[key].quantity += entry.quantity;

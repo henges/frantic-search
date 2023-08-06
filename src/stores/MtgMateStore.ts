@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { SearchRequest } from "../converter/QueryConverter";
+import { CardRequest } from "../converter/QueryConverter";
 import { VendorCard } from "../types/Cards";
 import { MTGMATE_VENDORS } from "../types/Vendors";
 import { get, post } from "../api/Http";
@@ -9,7 +9,7 @@ interface Store {
 }
 
 interface Actions {
-    search: (r: SearchRequest[]) => Promise<VendorCard[]>
+    search: (r: CardRequest[]) => Promise<VendorCard[]>
 }
 
 const resolveHosts = () => {
@@ -51,7 +51,7 @@ export const useMtgMateStore = create<Store & Actions>((set, _get) => ({
                         price: parseFloat(r.querySelector("td.price")?.textContent?.trim().slice(1) || "0.00"),
                         setName: r.querySelector("td.magic-set-name")?.querySelector("a")?.text.trim() || "",
                         foil: r.querySelector("td.card-name")?.querySelector("span.finish")?.textContent?.trim() !== "Nonfoil",
-                        vendorName: v.name,
+                        vendor: v.name,
                         priceRank: 0
                     };
 

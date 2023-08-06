@@ -1,9 +1,9 @@
-export type SearchRequest = {
+export type CardRequest = {
     name: string
     quantity: string
 }
 
-export const parseSearchString = (input: string): SearchRequest[] => {
+export const parseSearchString = (input: string): CardRequest[] => {
 
     // The regex here is quite complicated...
     // The first portion says, if the line starts with a number, match

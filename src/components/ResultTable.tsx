@@ -51,7 +51,7 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
             cell: info => info.getValue() ? "Yes" : "No",
             header: "Foil"
         }),
-        colHelper.accessor("vendorName", {
+        colHelper.accessor("vendor", {
             cell: info => info.getValue(),
             header: "Vendor"
         }),

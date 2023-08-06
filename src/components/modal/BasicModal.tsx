@@ -23,7 +23,7 @@ export const BasicModal: React.FC<BasicModalProps> = ({ isOpen, reset, onSave, o
             </ModalBody>
             <ModalFooter>
                 {reset &&
-                <Button colorScheme='whiteAlpha' mr={"auto"} onClick={reset.action}>
+                <Button colorScheme='facebook' mr={"auto"} onClick={reset.action}>
                   {reset.text}
                 </Button>}
                 <Button colorScheme='blue' mr={3} onClick={onSave || onClose}>
