@@ -18,8 +18,6 @@ jobs:
       - name: Build app
         # Don't treat warnings as errors
         run: CI=false yarn build
-      - name: Setup Git user
-        uses: fregante/setup-git-user@v2
       - name: Checkout henges.github.io
         uses: actions/checkout@v4
         with:
@@ -29,11 +27,14 @@ jobs:
       - name: Move build to checkout dir, commit and push
         shell: bash
         run: |
+          rm -r ./upstream/frantic-search
           mv ./build ./upstream/frantic-search
           cd upstream
           LONG_SHA="${{ github.sha }}"
           SHORT_SHA=$(echo "${LONG_SHA:0:15}")
           ls -la
           git status
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git commit -am "Update frantic-search to ${{ github.ref_name }}@${SHORT_SHA}"
           git push
