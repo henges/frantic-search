@@ -12,7 +12,6 @@ jobs:
         run: npm i --global yarn
       - name: Checkout this repo
         uses: actions/checkout@v4
-      - run: ls -la; pwd
       - name: Install deps
         run: yarn install
       - name: Build app
@@ -31,9 +30,7 @@ jobs:
           mv ./build ./upstream/frantic-search
           cd upstream
           LONG_SHA="${{ github.sha }}"
-          SHORT_SHA=$(echo "${LONG_SHA:0:15}")
-          ls -la
-          git status
+          SHORT_SHA=$(echo "${LONG_SHA:0:7}")
           git config user.name github-actions
           git config user.email github-actions@github.com
           git commit -am "Update frantic-search to ${{ github.ref_name }}@${SHORT_SHA}"
