@@ -16,7 +16,8 @@ jobs:
       - name: Install deps
         run: yarn install
       - name: Build app
-        run: yarn build
+        # Don't treat warnings as errors
+        run: CI=false yarn build
       - name: Setup Git user
         uses: fregante/setup-git-user@v2
       - name: Checkout henges.github.io
