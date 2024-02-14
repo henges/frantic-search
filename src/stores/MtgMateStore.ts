@@ -40,24 +40,33 @@ export const useMtgMateStore = create<Store & Actions>((set, _get) => ({
             }
             const result = Array.from(table.querySelectorAll("tr"))
                 .map(r => {
-                    let name = r.querySelector("td.card-name")?.querySelector("a")?.text.trim() || "";
+                    const tdCard = r.querySelector("td.card-name")
+                    let name = tdCard?.querySelector("a")?.text.trim() || "";
                     if (name.indexOf("(") > 0) {
                         name = name.substring(0, name.indexOf("(") - 1);
                     }
 
+                    const cardHref = tdCard?.querySelector("a")?.href.trim()
+
+                    let path = ""
+                    if (cardHref != null) {
+                        const url = new URL(cardHref)
+                        path = `${v.vendorUrl}${url.pathname}`
+                    }
                     const ret: VendorCard = {
-                        name: name,
-                        quantity: parseInt(r.querySelector("td.available-quantity")?.textContent?.trim() || "0"),
-                        price: parseFloat(r.querySelector("td.price")?.textContent?.trim().slice(1) || "0.00"),
-                        setName: r.querySelector("td.magic-set-name")?.querySelector("a")?.text.trim() || "",
-                        foil: r.querySelector("td.card-name")?.querySelector("span.finish")?.textContent?.trim() !== "Nonfoil",
-                        vendor: v.name,
-                        priceRank: 0
-                    };
+                            name: name,
+                            quantity: parseInt(r.querySelector("td.available-quantity")?.textContent?.trim() || "0"),
+                            price: parseFloat(r.querySelector("td.price")?.textContent?.trim().slice(1) || "0.00"),
+                            setName: r.querySelector("td.magic-set-name")?.querySelector("a")?.text.trim() || "",
+                            foil: tdCard?.querySelector("span.finish")?.textContent?.trim() !== "Nonfoil",
+                            vendor: v.name,
+                            priceRank: 0,
+                            url: path
+                        }
+                    ;
 
                     return ret;
                 })
-
             return result;
         });
 

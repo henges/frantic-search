@@ -1,6 +1,21 @@
 import { createColumnHelper, useReactTable, getCoreRowModel, flexRender, RowData, ColumnMeta, getSortedRowModel, getPaginationRowModel, getFilteredRowModel } from "@tanstack/react-table";
 import { VendorCard } from "../types/Cards";
-import { Box, Table, Thead, Tr, Th, Td, Tbody, Center, Flex, Button, Select, Input, HStack } from "@chakra-ui/react";
+import {
+    Box,
+    Table,
+    Thead,
+    Tr,
+    Th,
+    Td,
+    Tbody,
+    Center,
+    Flex,
+    Button,
+    Select,
+    Input,
+    HStack,
+    Link
+} from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useMemo, useState } from "react";
 
@@ -15,7 +30,6 @@ export type ResultTableProps = {
 }
 
 const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
-
     const [globalFilter, setGlobalFilter] = useState<string>("");
 
     const colHelper = createColumnHelper<VendorCard>();
@@ -51,8 +65,8 @@ const ResultTable: React.FC<ResultTableProps> = ({ results }) => {
             cell: info => info.getValue() ? "Yes" : "No",
             header: "Foil"
         }),
-        colHelper.accessor("vendor", {
-            cell: info => info.getValue(),
+        colHelper.accessor(row => [row.vendor, row.url], {
+            cell: info => <Link color={'blue.500'} href={info.getValue()[1]}>{info.getValue()[0]}</Link>,
             header: "Vendor"
         }),
     ], [])

@@ -36,12 +36,17 @@ export const useBinderPosStore = create<Store & Actions>((set, get) => ({
 
         const hosts = resolveHosts();
         // Strip diacritics, if any, from BinderPOS seaches (their backend won't accept them otherwise.)
-        const query = r.map(card => ({card: card.name.normalize("NFD").replace(/\p{Diacritic}/gu, ""), quantity: card.quantity}));
+        const query = r.map(card => ({
+            card: card.name.normalize("NFD").replace(/\p{Diacritic}/gu, ""),
+            quantity: card.quantity
+        }));
 
         const result = Object.values(hosts).map(async (v) => {
-            const response = (await post(
-                `https://portal.binderpos.com/external/shopify/decklist?storeUrl=${v.url}&type=mtg`, 
-                query)).body as BinderPosResponse[];
+
+            const body = (await post(
+                `https://portal.binderpos.com/external/shopify/decklist?storeUrl=${v.url}&type=mtg`,
+                query)).body
+            const response = body as BinderPosResponse[];
 
             const result = response
                 .flatMap(e => e.products)
@@ -63,6 +68,7 @@ export const useBinderPosStore = create<Store & Actions>((set, get) => ({
                         foil: !!variants.title.toLowerCase().match(/foil/),
                         vendor: vendor,
                         priceRank: 0,
+                        url: `${v.vendorUrl}/products/${c.handle}?variant=${variants.shopifyId}`
                     };
 
                     // Deduplicate entries
