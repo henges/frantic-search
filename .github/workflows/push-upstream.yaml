@@ -1,0 +1,34 @@
+name: Push upstream
+
+on:
+  repository_dispatch:
+
+jobs:
+  build:
+    name: "Build app"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Yarn
+        run: npm i --global yarn
+      - name: Install deps
+        run: yarn install
+      - name: Build app
+        run: yarn build
+      - name: Setup Git user
+        uses: fregante/setup-git-user@v2
+      - name: Checkout henges.github.io
+        uses: actions/checkout@v4
+        with:
+          repository: henges/henges.github.io
+          path: upstream
+          token: ${{ secrets.UPSTREAM_PUSH_PAT }}
+      - run: 
+      - run: cd upstream
+      - name: Move build to checkout dir, commit and push
+        shell: bash
+        run: |
+          mv ./build ./upstream/frantic-search
+          cd upstream
+          SHORT_SHA=head -c 7 <<< ${{ github.sha }}
+          git commit -am "Update frantic-search to ${{ github.ref_name }}@${SHORT_SHA}"
+          git push
