@@ -31,6 +31,9 @@ jobs:
         run: |
           mv ./build ./upstream/frantic-search
           cd upstream
-          SHORT_SHA=head -c 7 <<< ${{ github.sha }}
+          LONG_SHA="${{ github.sha }}"
+          SHORT_SHA=$(echo "${LONG_SHA:0:15}")
+          ls -la
+          git status
           git commit -am "Update frantic-search to ${{ github.ref_name }}@${SHORT_SHA}"
           git push
