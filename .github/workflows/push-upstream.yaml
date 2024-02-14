@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: Install Yarn
         run: npm i --global yarn
+      - run: ls -la; pwd
       - name: Install deps
         run: yarn install
       - name: Build app
