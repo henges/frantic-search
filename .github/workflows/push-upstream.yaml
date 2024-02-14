@@ -3,4 +3,36 @@ name: Push upstream
 on:
   workflow_dispatch:
 
-steps:
+jobs:
+  build:
+    name: "Build app"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Yarn
+        run: npm i --global yarn
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+      - name: Install deps
+        run: yarn install
+      - name: Build app
+        # Don't treat warnings as errors
+        run: CI=false yarn build
+      - name: Checkout henges.github.io
+        uses: actions/checkout@v4
+        with:
+          repository: henges/henges.github.io
+          path: upstream
+          token: ${{ secrets.UPSTREAM_PUSH_PAT }}
+      - name: Move build to checkout dir, commit and push
+        shell: bash
+        run: |
+          rm -r ./upstream/frantic-search
+          mv ./build ./upstream/frantic-search
+          cd upstream
+          LONG_SHA="${{ github.sha }}"
+          SHORT_SHA=$(echo "${LONG_SHA:0:7}")
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -am "Update frantic-search to ${{ github.ref_name }}@${SHORT_SHA}"
+          git push
