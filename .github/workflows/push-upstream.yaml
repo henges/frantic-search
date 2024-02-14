@@ -22,8 +22,6 @@ jobs:
           repository: henges/henges.github.io
           path: upstream
           token: ${{ secrets.UPSTREAM_PUSH_PAT }}
-      - run: 
-      - run: cd upstream
       - name: Move build to checkout dir, commit and push
         shell: bash
         run: |
