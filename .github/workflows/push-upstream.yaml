@@ -1,0 +1,6 @@
+name: Push upstream
+
+on:
+  workflow_dispatch:
+
+steps:
