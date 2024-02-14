@@ -10,7 +10,9 @@ jobs:
     steps:
       - name: Install Yarn
         run: npm i --global yarn
-      - run: ls -la; pwd
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+      - run: cd frantic-search; ls -la; pwd
       - name: Install deps
         run: yarn install
       - name: Build app
