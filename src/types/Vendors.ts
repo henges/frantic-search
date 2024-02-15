@@ -63,6 +63,12 @@ export const BINDER_POS_VENDORS: Record<string, BinderPosBackendVendor> = {
         url: "unplugged-games.myshopify.com",
         name: "Unplugged Games"
     }
+    ,
+    "plenty-of-games-au.myshopify.com": {
+        backend: VendorBackend.BINDER_POS,
+        url: "plenty-of-games-au.myshopify.com",
+        name: "Plenty of Games"
+    }
 }
 export const MTGMATE_VENDORS: Record<string, MtgMateVendor> = {
     "mtgmate.com.au": {
