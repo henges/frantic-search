@@ -77,6 +77,7 @@ export const BINDER_POS_VENDORS: Record<string, BinderPosBackendVendor> = {
     "plenty-of-games-au.myshopify.com": {
         backend: VendorBackend.BINDER_POS,
         url: "plenty-of-games-au.myshopify.com",
+        vendorUrl: "https://plentyofgames.com.au",
         name: "Plenty of Games"
     }
 }
