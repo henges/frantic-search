@@ -9,6 +9,7 @@ export type VendorCard = Card & {
     foil: boolean
     vendor: string
     priceRank: number
+    url: string
 }
 
 /** A mapping from vendor names to card names to lists of that card available at that vendor. */

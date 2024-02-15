@@ -14,10 +14,12 @@ export type BinderPosProduct = {
     name: string // eg "Boseiju, Who Endures",
     setName: string // eg "Kamigawa: Neon Dynasty Prerelease Promos",
     collectorNumber: string //eg "266"
+    handle: string
 }
 
 export type BinderPosVariant = {
     title: string //eg "Near Mint Foil",
     price: number //eg 83.1,
     quantity: number //eg 1
+    shopifyId: number
 }
