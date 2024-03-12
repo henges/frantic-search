@@ -16,9 +16,9 @@ const resolveHosts = () => {
 
     const resolved = Object.assign({}, MTGMATE_VENDORS);
     const exclude: Record<string, boolean> = JSON.parse(localStorage.getItem("fs-ignore-vendors") || "{}");
-    Object.keys(exclude).forEach(k => delete resolved[k]);
-
-    return resolved;
+    const filtered = Object.fromEntries(Object.entries(resolved).filter(([k, v]) => !exclude.hasOwnProperty(v.url)));
+    
+    return filtered;
 }
 
 export const useMtgMateStore = create<Store & Actions>((set, _get) => ({
