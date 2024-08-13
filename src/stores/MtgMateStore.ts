@@ -38,27 +38,29 @@ export const useMtgMateStore = create<Store & Actions>((set, _get) => ({
             if (!table) {
                 return [];
             }
-            const result = Array.from(table.querySelectorAll("tr"))
+            const tdCardName = table.querySelector("tr th.card-name")
+            const result = Array.from(table.querySelectorAll("tr.magic-card"))
                 .map(r => {
-                    const tdCard = r.querySelector("td.card-name")
-                    let name = tdCard?.querySelector("a")?.text.trim() || "";
+                    const tdRow = r.querySelector("td.card-name")
+                    let name = tdCardName?.textContent?.trim() || "";
                     if (name.indexOf("(") > 0) {
                         name = name.substring(0, name.indexOf("(") - 1);
                     }
 
-                    const cardHref = tdCard?.querySelector("a")?.href.trim()
-
+                    const cardHref = tdRow?.querySelector("a")?.href.trim()
                     let path = ""
                     if (cardHref != null) {
                         const url = new URL(cardHref)
                         path = `${v.vendorUrl}${url.pathname}`
                     }
+
+                    const qty = r?.querySelector("td.quantity")?.textContent?.replace("Available: ", "").trim() || "0";
                     const ret: VendorCard = {
                             name: name,
-                            quantity: parseInt(r.querySelector("td.available-quantity")?.textContent?.trim() || "0"),
+                            quantity: parseInt(qty),
                             price: parseFloat(r.querySelector("td.price")?.textContent?.trim().slice(1) || "0.00"),
-                            setName: r.querySelector("td.magic-set-name")?.querySelector("a")?.text.trim() || "",
-                            foil: tdCard?.querySelector("span.finish")?.textContent?.trim() !== "Nonfoil",
+                            setName: tdRow?.querySelector("span.set-name-link")?.querySelector("a")?.text.trim() || "",
+                            foil: tdRow?.querySelector("span.finish")?.textContent?.trim() !== "Nonfoil",
                             vendor: v.name,
                             priceRank: 0,
                             url: path
@@ -67,6 +69,7 @@ export const useMtgMateStore = create<Store & Actions>((set, _get) => ({
 
                     return ret;
                 })
+            console.log(result)
             return result;
         });
 
