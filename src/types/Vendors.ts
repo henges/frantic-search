@@ -91,7 +91,7 @@ export const MTGMATE_VENDORS: Record<string, MtgMateVendor> = {
     "mtgmate.com.au": {
         backend: VendorBackend.MTGMATE,
         name: "MTGMate",
-        url: "https://polluxus.dev/mtgmate/?utf8=✓&decklist=",
+        url: "https://www.mtgmate.com.au/cards/decklist_results?utf8=%E2%9C%93&decklist=",
         vendorUrl: "https://mtgmate.com.au"
     }
 }
