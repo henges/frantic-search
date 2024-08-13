@@ -67,12 +67,6 @@ export const BINDER_POS_VENDORS: Record<string, BinderPosBackendVendor> = {
         vendorUrl: "https://ggadelaide.com.au",
         name: "Good Games Adelaide"
     },
-    "https://good-games-greensborough.myshopify.com": {
-        backend: VendorBackend.BINDER_POS,
-        url: "https://good-games-greensborough.myshopify.com",
-        vendorUrl: "https://gggreensborough.com.au",
-        name: "Good Games Greensborough"
-    },
     "unplugged-games.myshopify.com": {
         backend: VendorBackend.BINDER_POS,
         url: "unplugged-games.myshopify.com",
