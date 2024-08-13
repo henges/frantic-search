@@ -69,7 +69,6 @@ export const useMtgMateStore = create<Store & Actions>((set, _get) => ({
 
                     return ret;
                 })
-            console.log(result)
             return result;
         });
 
