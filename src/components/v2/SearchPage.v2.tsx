@@ -2,39 +2,17 @@ import {useMtgMateStore} from "../../stores/MtgMateStore";
 import {useBinderPosStore} from "../../stores/BinderPosStore";
 import React, {useState} from "react";
 import {VendorCard} from "../../types/Cards";
-import ResultTableV2 from "./ResultTableV2";
+import ResultTableV2 from "./ResultTable.v2";
 import {CardRequest, parseSearchString} from "../../converter/QueryConverter";
 import {Container, Flex, Heading, HStack, Text, VStack} from "@chakra-ui/react";
-import SearchBox from "../SearchBox";
 import VendorFilter from "../VendorFilter";
-import {ColorModeSwitcher} from "../vendor/ColorModeSwitcher";
 import {useScryfallStore} from "../../stores/ScryfallStore";
 import {Card} from "scryfall-api";
+import SearchBox from "./SearchBox.v2";
+import {PageHeader} from "./header/PageHeader.v2";
+import {SearchNav} from "./search/SearchNav";
 
-const PageHeader = () => (
-    <>
-        <Heading>
-            Frantic Search
-        </Heading>
-        <Text>
-            Search Australian MTG vendors
-        </Text>
-    </>
-)
-
-const SearchPageNav = () => (
-    <Flex
-        flexDir="column"
-        gap="2"
-        position="fixed"
-        top="16px"
-        right="16px"
-    >
-        <VendorFilter/>
-        <ColorModeSwitcher/>
-    </Flex>
-)
-export const SearchPageV2 = () => {
+export const SearchPage = () => {
     const searchMtgMate = useMtgMateStore((state) => state.search)
     const searchBinderPos = useBinderPosStore((state) => state.search)
     const searchScryfall = useScryfallStore((state) => state.search)
@@ -86,7 +64,6 @@ export const SearchPageV2 = () => {
         const res = await search(req)
         const sc = await scryfallSearch(req)
 
-
         const processed = processResults(res)
         setResults(processed)
         if (sc.length > 0) {
@@ -99,17 +76,17 @@ export const SearchPageV2 = () => {
 
     return (
         <>
-            <SearchPageNav/>
-            <Container w="100%" h="100%" maxW="100%" marginInline={"0"} py="16px">
+            <SearchNav />
+            <div className={"container mx-auto"}>
                 {/* TODO: grid is just for padding now, can center content instead. */}
                 <HStack alignItems={"center"} justifyContent={"center"}>
                     <VStack>
-                        <PageHeader/>
+                        <PageHeader />
                         <SearchBox handleSearch={handleSearch}/>
                     </VStack>
                 </HStack>
                 {results && <ResultTableV2 results={results}/>}
-            </Container>
+            </div>
         </>
     )
 }
