@@ -15,6 +15,7 @@ const VendorFilter = () => {
     const hasChanges = useRef<boolean>(false)
 
     const handleCheck = (checked: boolean, url: string) => {
+        console.log(checked)
         let newIgnore = {...transientIgnore}
         if (!checked) {
             newIgnore[url] = true
