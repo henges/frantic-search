@@ -1,6 +1,7 @@
 export enum VendorBackend {
     BINDER_POS,
-    MTGMATE
+    MTGMATE,
+    CK
 }
 
 interface Vendor {
@@ -16,6 +17,10 @@ interface BinderPosBackendVendor extends Vendor {
 
 interface MtgMateVendor extends Vendor {
     backend: VendorBackend.MTGMATE
+}
+
+interface CardKingdomVendor extends Vendor {
+    backend: VendorBackend.CK
 }
 
 export const BINDER_POS_VENDORS: Record<string, BinderPosBackendVendor> = {
@@ -96,7 +101,24 @@ export const MTGMATE_VENDORS: Record<string, MtgMateVendor> = {
     }
 }
 
+export const CK_VENDORS: Record<string, CardKingdomVendor> = {
+    "cardkingdom.com-regular": {
+        backend: VendorBackend.CK,
+        name: "Card Kingdom",
+        url: "https://www.cardkingdom.com/catalog/search?search=header&filter[tab]=mtg_card&filter[name]=",
+        vendorUrl: "https://www.cardkingdom.com"
+    },
+    "cardkingdom.com-foils": {
+        backend: VendorBackend.CK,
+        name: "Card Kingdom",
+        url: "https://www.cardkingdom.com/catalog/search?search=header&filter[tab]=mtg_foil&filter[name]=",
+        vendorUrl: "https://www.cardkingdom.com"
+    }
+}
+
 export const VENDORS: Record<VendorBackend, Record<string, Vendor>> = {
     [VendorBackend.BINDER_POS]: BINDER_POS_VENDORS,
-    [VendorBackend.MTGMATE]: MTGMATE_VENDORS
+    [VendorBackend.MTGMATE]: MTGMATE_VENDORS,
+    [VendorBackend.CK]: CK_VENDORS,
+
 }

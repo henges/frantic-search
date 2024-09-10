@@ -2,7 +2,6 @@ import { Box, Button, Checkbox, Flex, HStack, IconButton, Modal, VStack, Text, u
 import { useEffect, useRef, useState } from "react";
 import { VENDORS } from "../types/Vendors";
 import { useLocalStorage } from "usehooks-ts";
-import { FaMoon } from "react-icons/fa";
 import { BasicModal } from "./modal/BasicModal";
 import { MdStore } from 'react-icons/md'
 
