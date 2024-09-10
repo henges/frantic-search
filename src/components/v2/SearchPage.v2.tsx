@@ -4,13 +4,10 @@ import React, {useState} from "react";
 import {VendorCard} from "../../types/Cards";
 import ResultTableV2 from "./ResultTable.v2";
 import {CardRequest, parseSearchString} from "../../converter/QueryConverter";
-import {Container, Flex, Heading, HStack, Text, VStack} from "@chakra-ui/react";
-import VendorFilter from "../VendorFilter";
 import {useScryfallStore} from "../../stores/ScryfallStore";
 import {Card} from "scryfall-api";
 import SearchBox from "./SearchBox.v2";
 import {PageHeader} from "./header/PageHeader.v2";
-import {SearchNav} from "./search/SearchNav";
 
 export const SearchPage = () => {
     const searchMtgMate = useMtgMateStore((state) => state.search)
@@ -75,18 +72,15 @@ export const SearchPage = () => {
     }
 
     return (
-        <>
-            <SearchNav />
-            <div className={"container mx-auto"}>
-                {/* TODO: grid is just for padding now, can center content instead. */}
-                <HStack alignItems={"center"} justifyContent={"center"}>
-                    <VStack>
-                        <PageHeader />
-                        <SearchBox handleSearch={handleSearch}/>
-                    </VStack>
-                </HStack>
-                {results && <ResultTableV2 results={results}/>}
+        <div className={"w-full h-full overflow-auto bg-white dark:bg-gray-800"}>
+            {/* TODO: grid is just for padding now, can center content instead. */}
+            <div className={"container mx-auto h-full overflow-auto"}>
+                <PageHeader/>
+                <div className={'mt-32'}>
+                    <SearchBox handleSearch={handleSearch}/>
+                </div>
             </div>
-        </>
+            {results && <ResultTableV2 results={results}/>}
+        </div>
     )
 }

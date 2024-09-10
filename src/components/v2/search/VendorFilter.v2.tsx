@@ -53,7 +53,7 @@ const VendorFilter = () => {
     return (
         <>
             <BuildingStorefrontIcon
-                className={'cursor-pointer'}
+                className={'cursor-pointer dark:bg-gray-900 dark:fill-white'}
                 onClick={() => setOpen(true)}
                 aria-label={`Set vendor options`}
             />

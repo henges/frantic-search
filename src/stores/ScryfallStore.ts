@@ -16,7 +16,7 @@ interface Actions {
 export const useScryfallStore = create<Store & Actions>((set, _get) => ({
     memo: {},
     search: async (cardRequest) => {
-
+        console.log(cardRequest)
         const fetch =
             async (uri: string): Promise<Card[]> => {
                 const result = await get(uri)
