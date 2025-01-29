@@ -90,6 +90,12 @@ export const BINDER_POS_VENDORS: Record<string, BinderPosBackendVendor> = {
         url: "eternal-magic-oz.myshopify.com",
         vendorUrl: "https://eternalmagic.cc",
         name: "Eternal Magic"
+    },
+    "good-games-pty.myshopify.com": {
+        backend: VendorBackend.BINDER_POS,
+        url: "good-games-pty.myshopify.com",
+        vendorUrl: "https://www.goodgamesnorth.com.au/",
+        name: "Good Games North"
     }
 }
 export const MTGMATE_VENDORS: Record<string, MtgMateVendor> = {
