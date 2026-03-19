@@ -28,7 +28,7 @@ const SearchPageNav = () => (
         top="16px"
         right="16px"
     >
-        <VendorFilter/>
+        {/*<VendorFilter/>*/}
         <ColorModeSwitcher />
     </Flex>
 )
@@ -92,7 +92,9 @@ const SearchPage = () => {
             <HStack alignItems={"center"} justifyContent={"center"}>
                 <VStack>
                     <PageHeader/>
-                    <SearchBox handleSearch={handleSearch}/>
+                    <h3>We moved!</h3>
+                    <h3>You can find us <a style={{"color": "blue"}} href={"https://frantic-search.au"}>here</a>!</h3>
+                    {/*<SearchBox handleSearch={handleSearch}/>*/}
                 </VStack>
             </HStack>
             {results && <ResultTable results={results}/>}
